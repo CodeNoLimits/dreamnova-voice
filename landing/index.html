@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kol Nova — Smart Phone Reception 24/7</title>
+  <meta property="og:title" content="Kol Nova — Smart Phone Reception 24/7">
+  <meta property="og:description" content="Never miss a patient call again. Intelligent phone coverage for clinics & businesses.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dreamnova-voice.vercel.app">
+  <meta name="description" content="Intelligent phone reception 24/7 for clinics & businesses.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwindcss.config = {
+      theme: { extend: { colors: {
+        gold: '#D4AF37', 'gold-dark': '#B8960C', 'gold-light': '#F5E6A3',
+        dark: '#1A1A2E', 'dark-light': '#16213E', surface: '#0F3460'
+      }}}
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --font-main: 'Inter', 'Assistant', sans-serif; }
+    [dir="rtl"] { --font-main: 'Assistant', 'Heebo', sans-serif; }
+    * { font-family: var(--font-main); }
+    html { scroll-behavior: smooth; }
+    .gradient-gold { background: linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%); }
+    .text-gradient { background: linear-gradient(135deg, #D4AF37, #F5E6A3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glow { box-shadow: 0 0 30px rgba(212,175,55,0.3); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 50% { box-shadow: 0 0 0 15px rgba(212,175,55,0); } }
+    .pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .float { animation: float 3s ease-in-out infinite; }
+    .lang-btn { transition: all 0.2s; }
+    .lang-btn.active { background: #D4AF37; color: #1A1A2E; }
+  </style>
+</head>
+<body class="bg-dark text-white">
+<script>
+const T = {
+  he: {
+    dir:'rtl', lang:'he',
+    nav_cta:'התחילו עכשיו', badge:'קבלה טלפונית חכמה למרפאות ועסקים',
+    hero1:'פסיקו להפסיד מטופלים.', hero2:'קול נובה', hero3:' — קבלה טלפונית חכמה 24/7.',
+    sub:'לא מחליפים את המזכירה. קולטים את השיחות שהיא לא מספיקה לענות.',
+    cta_wa:'דברו איתנו בווטסאפ', cta_demo:'צפו בדמו 60 שניות ←',
+    pain1:'כל שיחה שלא נענית היא מטופל שהולך למתחרה',
+    pain2:'הקבלה שלכם צריכה להיות פתוחה 24/7, גם כשהקו תפוס',
+    pain3:'התקנה מהירה בלי לשנות את התפעול של המרפאה',
+    how:'איך זה עובד?', how_sub:'שלושה שלבים פשוטים — בלי לגעת במערכת הקיימת שלכם',
+    f1:'מענה 24/7', f1d:'כל שיחה נענית מיד — גם בלילה, גם כשהקו תפוס, גם בשבת. המטופל מרגיש שמישהו שם.',
+    f2:'קביעת תורים אוטומטית', f2d:'התור נקבע ישירות ביומן של גוגל שלכם. כאילו המזכירה הקלידה אותו.',
+    f3:'סיכום יומי', f3d:'כל בוקר מקבלים סיכום של כל השיחות — מי התקשר, מה רצה, ומתי קבע תור.',
+    demo_t:'שמעו בעצמכם', demo_s:'דמו של 60 שניות — שיחה אמיתית עם הקבלה החכמה',
+    demo_r:'הדמו מוכן — לחצו לצפייה', demo_b:'▶️ צפו בדמו', demo_n:'* הקישור יתעדכן עם הדמו המלא',
+    pr_t:'מחירון', pr_s:'התחילו עם פיילוט של 7 ימים — בלי סיכון',
+    p1n:'פיילוט',p1p:'390₪',p1per:'חד-פעמי · 7 ימים',p1note:'נקזז מהסטאפ אם ממשיכים',
+    p1f1:'מענה קולי 24/7',p1f2:'בדיקה בתנאים אמיתיים',p1f3:'אפס סיכון',p1c:'התחילו פיילוט',
+    p2n:'Voice + Booking',p2p:'800₪',p2per:'/חודש',p2s:'סטאפ: 2,000₪',p2badge:'הכי פופולרי',
+    p2f1:'מענה 24/7',p2f2:'קביעת תורים אוטומטית',p2f3:'סנכרון עם גוגל קלנדר',p2f4:'סיכום יומי',p2c:'בחרו חבילה זו',
+    p3n:'קבלה מלאה',p3p:'1,500₪',p3per:'/חודש',p3s:'סטאפ: 3,500₪',
+    p3f1:'הכול ב-Voice + Booking',p3f2:'SMS אישור תור',p3f3:'No-Show Recovery',p3f4:'תזכורת יום לפני',p3c:'בחרו חבילה זו',
+    p4n:'מולטי-סניפים',p4p:'2,500₪',p4per:'/חודש',p4s:'סטאפ: 6,000₪',
+    p4f1:'הכול בקבלה מלאה',p4f2:'פריסה מרובת סניפים',p4f3:'דשבורד מרכזי',p4f4:'דוחות שבועיים',p4c:'בחרו חבילה זו',
+    tr_t:'למה מרפאות בוחרות בקול נובה?',
+    t1:'בטוח ומאובטח',t1d:'אף מידע רפואי לא נשמר. הפרטיות של המטופלים מוגנת.',
+    t2:'בלי לשנות כלום',t2d:'עובד מעל המערכת הקיימת. התורים מופיעים ביומן כרגיל.',
+    t3:'לא מחליף את הצוות',t3d:'משלים את המזכירה — עונה כשהיא תפוסה, בלילה, ובסוף שבוע.',
+    fin_t:'מוכנים להפסיק להפסיד מטופלים?',fin_s:'פיילוט 7 ימים ב-390₪ בלבד. נקזז מהסטאפ אם ממשיכים.',fin_c:'דברו איתנו עכשיו בווטסאפ',
+    ft1:'קול נובה — שירות של DreamNova Consult',ft2:'דוד אמור · ירושלים · 2026',ft3:'לא מחליפים את המזכירה. קולטים את השיחות שהיא לא מספיקה לענות.'
+  },
+  fr: {
+    dir:'ltr', lang:'fr',
+    nav_cta:'Commencer', badge:'Réception téléphonique intelligente pour cabinets & PME',
+    hero1:'Arrêtez de perdre des patients.', hero2:'Kol Nova', hero3:' — réception téléphonique intelligente 24/7.',
+    sub:'On ne remplace pas votre secrétaire. On absorbe les appels perdus et hors horaires.',
+    cta_wa:'Contactez-nous sur WhatsApp', cta_demo:'Voir la démo 60 sec →',
+    pain1:'Chaque appel manqué est un patient qui part chez le concurrent',
+    pain2:'Votre réception ouverte 24/7, même quand la ligne est occupée',
+    pain3:'Installation rapide, sans changer le fonctionnement du cabinet',
+    how:'Comment ça marche ?', how_sub:'Trois étapes simples — sans toucher à votre système existant',
+    f1:'Réponse 24/7', f1d:'Chaque appel est pris immédiatement — le soir, le week-end, quand la ligne est occupée. Le patient se sent accueilli.',
+    f2:'Prise de RDV automatique', f2d:"Le rendez-vous apparaît directement dans votre Google Calendar. Comme si votre secrétaire l'avait tapé.",
+    f3:'Résumé quotidien', f3d:"Chaque matin, un résumé de tous les appels — qui a appelé, ce qu'il voulait, et le RDV pris.",
+    demo_t:'Écoutez par vous-même', demo_s:'Démo de 60 secondes — un vrai appel avec la réception intelligente',
+    demo_r:'La démo est prête — cliquez pour écouter', demo_b:'▶️ Voir la démo', demo_n:'* Le lien sera mis à jour avec la démo complète',
+    pr_t:'Tarifs', pr_s:'Commencez avec un pilote de 7 jours — zéro risque',
+    p1n:'Pilote',p1p:'49€',p1per:'unique · 7 jours',p1note:'Déductible du setup si vous continuez',
+    p1f1:'Réception vocale 24/7',p1f2:'Test en conditions réelles',p1f3:'Zéro risque',p1c:'Démarrer le pilote',
+    p2n:'Voice + Booking',p2p:'100€',p2per:'/mois',p2s:'Setup : 250€',p2badge:'Le plus populaire',
+    p2f1:'Réponse 24/7',p2f2:'Prise de RDV automatique',p2f3:'Sync Google Calendar',p2f4:'Résumé quotidien',p2c:'Choisir cette offre',
+    p3n:'Réception Complète',p3p:'190€',p3per:'/mois',p3s:'Setup : 450€',
+    p3f1:'Tout de Voice + Booking',p3f2:'SMS de confirmation',p3f3:'No-Show Recovery',p3f4:'Rappel J-1',p3c:'Choisir cette offre',
+    p4n:'Multi-Sites',p4p:'310€',p4per:'/mois',p4s:'Setup : 750€',
+    p4f1:'Tout de Réception Complète',p4f2:'Déploiement multi-sites',p4f3:'Dashboard centralisé',p4f4:'Rapports hebdo',p4c:'Choisir cette offre',
+    tr_t:'Pourquoi les cabinets choisissent Kol Nova ?',
+    t1:'Sécurisé',t1d:'Aucune donnée médicale stockée. La vie privée de vos patients est protégée.',
+    t2:'Sans rien changer',t2d:"Fonctionne par-dessus votre système existant. Les RDV apparaissent dans votre agenda.",
+    t3:"Ne remplace pas l'équipe",t3d:"Complète votre secrétaire — répond quand elle est occupée, le soir et le week-end.",
+    fin_t:'Prêt à ne plus perdre de patients ?',fin_s:'Pilote 7 jours à 49€ seulement. Déductible du setup si vous continuez.',fin_c:'Contactez-nous sur WhatsApp',
+    ft1:'Kol Nova — un service DreamNova Consult',ft2:'David Amor · Jérusalem · 2026',ft3:'On ne remplace pas votre secrétaire. On absorbe les appels perdus.'
+  },
+  en: {
+    dir:'ltr', lang:'en',
+    nav_cta:'Get Started', badge:'Smart phone reception for clinics & businesses',
+    hero1:'Stop losing patients.', hero2:'Kol Nova', hero3:' — smart phone reception 24/7.',
+    sub:"We don't replace your receptionist. We catch the calls she can't answer.",
+    cta_wa:'Talk to us on WhatsApp', cta_demo:'Watch the 60-sec demo →',
+    pain1:'Every missed call is a patient going to your competitor',
+    pain2:'Your reception open 24/7, even when the line is busy',
+    pain3:'Quick setup, no changes to your practice workflow',
+    how:'How does it work?', how_sub:'Three simple steps — without touching your existing system',
+    f1:'24/7 Answering', f1d:'Every call answered immediately — evenings, weekends, when the line is busy. The patient feels welcomed.',
+    f2:'Auto Booking', f2d:'Appointments appear directly in your Google Calendar. As if your receptionist typed them in.',
+    f3:'Daily Summary', f3d:'Every morning, a summary of all calls — who called, what they needed, and appointments booked.',
+    demo_t:'Hear it yourself', demo_s:'60-second demo — a real call with the smart reception',
+    demo_r:'Demo is ready — click to listen', demo_b:'▶️ Watch demo', demo_n:'* Link will be updated with the full demo',
+    pr_t:'Pricing', pr_s:'Start with a 7-day pilot — zero risk',
+    p1n:'Pilot',p1p:'$99',p1per:'one-time · 7 days',p1note:'Deductible from setup if you continue',
+    p1f1:'24/7 voice reception',p1f2:'Real-world testing',p1f3:'Zero risk',p1c:'Start pilot',
+    p2n:'Voice + Booking',p2p:'$199',p2per:'/month',p2s:'Setup: $499',p2badge:'Most popular',
+    p2f1:'24/7 answering',p2f2:'Auto appointment booking',p2f3:'Google Calendar sync',p2f4:'Daily summary',p2c:'Choose this plan',
+    p3n:'Full Reception',p3p:'$349',p3per:'/month',p3s:'Setup: $899',
+    p3f1:'Everything in Voice + Booking',p3f2:'SMS confirmation',p3f3:'No-Show Recovery',p3f4:'Day-before reminder',p3c:'Choose this plan',
+    p4n:'Multi-Location',p4p:'$599',p4per:'/month',p4s:'Setup: $1,499',
+    p4f1:'Everything in Full Reception',p4f2:'Multi-location deployment',p4f3:'Centralized dashboard',p4f4:'Weekly reports',p4c:'Choose this plan',
+    tr_t:'Why clinics choose Kol Nova',
+    t1:'Secure & Private',t1d:"No medical data stored. Your patients' privacy is protected.",
+    t2:'No changes needed',t2d:'Works on top of your existing system. Appointments appear in your calendar as usual.',
+    t3:"Doesn't replace staff",t3d:"Complements your receptionist — answers when she's busy, at night, and on weekends.",
+    fin_t:'Ready to stop losing patients?',fin_s:'7-day pilot for just $99. Deductible from setup if you continue.',fin_c:'Talk to us on WhatsApp now',
+    ft1:'Kol Nova — a DreamNova Consult service',ft2:'David Amor · Jerusalem · 2026',ft3:"We don't replace your receptionist. We catch the calls she can't answer."
+  }
+};
+function detectLang(){const p=new URLSearchParams(location.search);if(p.get('lang')&&T[p.get('lang')])return p.get('lang');const b=navigator.language||'en';if(b.startsWith('he'))return'he';if(b.startsWith('fr'))return'fr';return'en';}
+let curLang=detectLang();
+function setLang(l){curLang=l;const t=T[l];document.documentElement.lang=t.lang;document.documentElement.dir=t.dir;document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;if(t[k])e.textContent=t[k];});document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const u=new URL(location);u.searchParams.set('lang',l);history.replaceState({},'',u);}
+document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
+</script>
+
+<!-- Navbar -->
+<nav class="fixed top-0 right-0 left-0 z-50 bg-dark/95 backdrop-blur-md border-b border-gold/20">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl">📞</span>
+      <span class="text-xl font-bold text-gradient">Kol Nova</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="flex gap-1 bg-dark-light rounded-full p-1 border border-gold/20">
+        <button onclick="setLang('he')" data-lang="he" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">עב</button>
+        <button onclick="setLang('fr')" data-lang="fr" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">FR</button>
+        <button onclick="setLang('en')" data-lang="en" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">EN</button>
+      </div>
+      <a href="#pricing" class="bg-gold text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-dark transition-colors"><span data-t="nav_cta">Get Started</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="min-h-screen flex items-center justify-center px-4 pt-20 pb-16">
+  <div class="max-w-4xl text-center">
+    <div class="inline-block bg-gold/10 border border-gold/30 rounded-full px-4 py-1 text-gold text-sm font-semibold mb-6"><span data-t="badge"></span></div>
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+      <span data-t="hero1"></span><br>
+      <span class="text-gradient" data-t="hero2"></span><span data-t="hero3"></span>
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" data-t="sub"></p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://wa.me/972XXXXXXXXX" class="gradient-gold text-dark px-8 py-4 rounded-xl font-bold text-lg glow pulse-gold hover:scale-105 transition-transform inline-flex items-center justify-center gap-2">
+        <svg class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-t="cta_wa"></span>
+      </a>
+      <a href="#demo" class="border-2 border-gold/50 text-gold px-8 py-4 rounded-xl font-bold text-lg hover:bg-gold/10 transition-colors inline-flex items-center justify-center gap-2"><span data-t="cta_demo"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Pain Points -->
+<section class="py-16 px-4 bg-dark-light">
+  <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">📵</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain1"></p></div>
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">🕐</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain2"></p></div>
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">⚡</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain3"></p></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="py-20 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-t="how"></h2>
+    <p class="text-gray-400 text-center mb-12 text-lg" data-t="how_sub"></p>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-dark-light border border-gold/10 rounded-2xl p-8 text-center card-hover">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-dark text-2xl font-bold">1</span></div>
+        <h3 class="text-xl font-bold text-gold mb-3" data-t="f1"></h3><p class="text-gray-400 leading-relaxed" data-t="f1d"></p>
+      </div>
+      <div class="bg-dark-light border border-gold/10 rounded-2xl p-8 text-center card-hover">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-dark text-2xl font-bold">2</span></div>
+        <h3 class="text-xl font-bold text-gold mb-3" data-t="f2"></h3><p class="text-gray-400 leading-relaxed" data-t="f2d"></p>
+      </div>
+      <div class="bg-dark-light border border-gold/10 rounded-2xl p-8 text-center card-hover">
+        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-dark text-2xl font-bold">3</span></div>
+        <h3 class="text-xl font-bold text-gold mb-3" data-t="f3"></h3><p class="text-gray-400 leading-relaxed" data-t="f3d"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo -->
+<section id="demo" class="py-20 px-4 bg-dark-light">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-t="demo_t"></h2>
+    <p class="text-gray-400 mb-8 text-lg" data-t="demo_s"></p>
+    <div class="bg-dark border-2 border-gold/20 rounded-2xl p-12 glow">
+      <div class="float text-6xl mb-6">🎧</div>
+      <p class="text-xl text-gray-300 mb-6" data-t="demo_r"></p>
+      <a href="#" class="gradient-gold text-dark px-8 py-3 rounded-xl font-bold text-lg inline-block hover:scale-105 transition-transform"><span data-t="demo_b"></span></a>
+      <p class="text-sm text-gray-500 mt-4" data-t="demo_n"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="py-20 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-t="pr_t"></h2>
+    <p class="text-gray-400 text-center mb-12 text-lg" data-t="pr_s"></p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Pilot -->
+      <div class="bg-dark-light border border-gold/20 rounded-2xl p-6 card-hover">
+        <div class="text-sm text-gold font-semibold mb-2" data-t="p1n"></div>
+        <div class="text-3xl font-extrabold mb-1" data-t="p1p"></div>
+        <div class="text-gray-500 text-sm mb-4" data-t="p1per"></div>
+        <div class="text-xs text-gold/80 bg-gold/10 rounded-lg px-3 py-1 inline-block mb-4" data-t="p1note"></div>
+        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f3"></span></li>
+        </ul>
+        <a href="https://wa.me/972XXXXXXXXX" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p1c"></span></a>
+      </div>
+      <!-- Voice + Booking -->
+      <div class="bg-dark-light border-2 border-gold rounded-2xl p-6 card-hover relative glow">
+        <div class="absolute -top-3 right-4 bg-gold text-dark text-xs font-bold px-3 py-1 rounded-full" data-t="p2badge"></div>
+        <div class="text-sm text-gold font-semibold mb-2" data-t="p2n"></div>
+        <div class="text-3xl font-extrabold mb-1"><span data-t="p2p"></span><span class="text-lg text-gray-400" data-t="p2per"></span></div>
+        <div class="text-gray-500 text-sm mb-4" data-t="p2s"></div>
+        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f4"></span></li>
+        </ul>
+        <a href="https://wa.me/972XXXXXXXXX" class="block w-full text-center gradient-gold text-dark py-3 rounded-xl font-bold hover:scale-105 transition-transform"><span data-t="p2c"></span></a>
+      </div>
+      <!-- Full Reception -->
+      <div class="bg-dark-light border border-gold/20 rounded-2xl p-6 card-hover">
+        <div class="text-sm text-gold font-semibold mb-2" data-t="p3n"></div>
+        <div class="text-3xl font-extrabold mb-1"><span data-t="p3p"></span><span class="text-lg text-gray-400" data-t="p3per"></span></div>
+        <div class="text-gray-500 text-sm mb-4" data-t="p3s"></div>
+        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f4"></span></li>
+        </ul>
+        <a href="https://wa.me/972XXXXXXXXX" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p3c"></span></a>
+      </div>
+      <!-- Multi -->
+      <div class="bg-dark-light border border-gold/20 rounded-2xl p-6 card-hover">
+        <div class="text-sm text-gold font-semibold mb-2" data-t="p4n"></div>
+        <div class="text-3xl font-extrabold mb-1"><span data-t="p4p"></span><span class="text-lg text-gray-400" data-t="p4per"></span></div>
+        <div class="text-gray-500 text-sm mb-4" data-t="p4s"></div>
+        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f4"></span></li>
+        </ul>
+        <a href="https://wa.me/972XXXXXXXXX" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p4c"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="py-16 px-4 bg-dark-light">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-2xl font-bold mb-8" data-t="tr_t"></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6"><div class="text-3xl mb-3">🔒</div><h3 class="font-bold text-gold mb-2" data-t="t1"></h3><p class="text-gray-400 text-sm" data-t="t1d"></p></div>
+      <div class="p-6"><div class="text-3xl mb-3">🔌</div><h3 class="font-bold text-gold mb-2" data-t="t2"></h3><p class="text-gray-400 text-sm" data-t="t2d"></p></div>
+      <div class="p-6"><div class="text-3xl mb-3">👩‍⚕️</div><h3 class="font-bold text-gold mb-2" data-t="t3"></h3><p class="text-gray-400 text-sm" data-t="t3d"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="py-20 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-t="fin_t"></h2>
+    <p class="text-gray-400 text-lg mb-8" data-t="fin_s"></p>
+    <a href="https://wa.me/972XXXXXXXXX" class="gradient-gold text-dark px-10 py-5 rounded-2xl font-bold text-xl glow pulse-gold hover:scale-105 transition-transform inline-flex items-center gap-3">
+      <svg class="w-7 h-7 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-t="fin_c"></span>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-8 px-4 border-t border-gold/10">
+  <div class="max-w-4xl mx-auto text-center text-gray-500 text-sm">
+    <p class="mb-2" data-t="ft1"></p>
+    <p data-t="ft2"></p>
+    <p class="mt-4 text-xs text-gray-600" data-t="ft3"></p>
+  </div>
+</footer>
+</body>
+</html>
