@@ -1,0 +1,113 @@
+{
+  "name": "Kol Nova - Appointment Booking",
+  "description": "Webhook from Vapi → Create Google Calendar Event → Response 200",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "label": "Vapi Webhook Receiver",
+      "description": "Receives tool call from Vapi when patient wants to book appointment",
+      "config": {
+        "note": "Create a Custom Webhook in Make.com. Copy the webhook URL and paste it in vapi_config.json as MAKE_WEBHOOK_URL"
+      },
+      "expected_payload": {
+        "message": {
+          "type": "tool-calls",
+          "toolCallList": [
+            {
+              "function": {
+                "name": "book_appointment",
+                "arguments": {
+                  "patient_name": "ישראל ישראלי",
+                  "phone": "050-1234567",
+                  "datetime": "2026-03-10T14:00:00+02:00",
+                  "reason": "בדיקה תקופתית"
+                }
+              },
+              "id": "call_abc123"
+            }
+          ]
+        }
+      },
+      "output": {
+        "patient_name": "{{message.toolCallList[0].function.arguments.patient_name}}",
+        "phone": "{{message.toolCallList[0].function.arguments.phone}}",
+        "datetime": "{{message.toolCallList[0].function.arguments.datetime}}",
+        "reason": "{{message.toolCallList[0].function.arguments.reason}}",
+        "tool_call_id": "{{message.toolCallList[0].id}}"
+      }
+    },
+    {
+      "id": 2,
+      "module": "google-calendar:createAnEvent",
+      "label": "Create Calendar Event",
+      "description": "Creates a new event in Google Calendar with patient details",
+      "config": {
+        "connection": "YOUR_GOOGLE_CALENDAR_CONNECTION",
+        "calendarId": "primary",
+        "note": "Connect your Google account in Make.com first"
+      },
+      "mapping": {
+        "summary": "תור: {{1.patient_name}}",
+        "description": "מטופל: {{1.patient_name}}\nטלפון: {{1.phone}}\nסיבה: {{1.reason}}\n\n--- נקבע אוטומטית ע״י קול נובה ---",
+        "start": {
+          "dateTime": "{{1.datetime}}",
+          "timeZone": "Asia/Jerusalem"
+        },
+        "end": {
+          "dateTime": "{{addMinutes(1.datetime, 30)}}",
+          "timeZone": "Asia/Jerusalem"
+        },
+        "reminders": {
+          "useDefault": false,
+          "overrides": [
+            { "method": "popup", "minutes": 60 },
+            { "method": "popup", "minutes": 15 }
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "gateway:WebhookResponse",
+      "label": "Respond to Vapi",
+      "description": "Returns 200 OK with confirmation message so Vapi tells the patient the appointment is booked",
+      "config": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "body": {
+        "results": [
+          {
+            "toolCallId": "{{1.tool_call_id}}",
+            "result": "התור נקבע בהצלחה ל-{{1.patient_name}} בתאריך {{formatDate(1.datetime, 'DD/MM/YYYY')}} בשעה {{formatDate(1.datetime, 'HH:mm')}}. אישור יישלח בקרוב."
+          }
+        ]
+      }
+    }
+  ],
+  "setup_instructions": {
+    "step_1": "Go to make.com → Create new scenario",
+    "step_2": "Add module: Webhooks → Custom Webhook → Create webhook → Copy URL",
+    "step_3": "Paste webhook URL in vapi_config.json (replace {{MAKE_WEBHOOK_URL}})",
+    "step_4": "Add module: Google Calendar → Create an Event → Connect Google account",
+    "step_5": "Map fields as shown in flow[1].mapping above",
+    "step_6": "Add module: Webhooks → Webhook Response → Status 200 → Map body as shown",
+    "step_7": "Turn ON the scenario → Test with a Vapi call",
+    "step_8": "Verify: event appears in Google Calendar with patient details"
+  },
+  "daily_summary_scenario": {
+    "name": "Kol Nova - Daily Summary",
+    "description": "Optional: Send daily summary of all calls to clinic owner",
+    "trigger": "Schedule → Every day at 07:00 (Asia/Jerusalem)",
+    "flow": [
+      "Google Calendar → Search Events (today's date)",
+      "Iterator → Loop through events",
+      "Text Aggregator → Build summary",
+      "WhatsApp/Email → Send to clinic owner"
+    ],
+    "note": "Build this AFTER first client is live. Not needed for MVP."
+  }
+}
