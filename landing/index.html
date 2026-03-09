@@ -4,11 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kol Nova — Smart Phone Reception 24/7</title>
-  <meta property="og:title" content="Kol Nova — Smart Phone Reception 24/7">
-  <meta property="og:description" content="Never miss a patient call again. Intelligent phone coverage for clinics & businesses.">
+  <meta name="description" content="Intelligent phone reception 24/7 for clinics & businesses.">
+  <!-- SEO: canonical + hreflang -->
+  <link rel="canonical" id="canonical" href="https://dreamnova-voice.vercel.app/">
+  <link rel="alternate" hreflang="he" href="https://dreamnova-voice.vercel.app/?lang=he">
+  <link rel="alternate" hreflang="fr" href="https://dreamnova-voice.vercel.app/?lang=fr">
+  <link rel="alternate" hreflang="en" href="https://dreamnova-voice.vercel.app/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://dreamnova-voice.vercel.app/">
+  <!-- Open Graph -->
+  <meta property="og:title" id="og-title" content="Kol Nova — Smart Phone Reception 24/7">
+  <meta property="og:description" id="og-desc" content="Never miss a patient call again. Intelligent phone coverage for clinics & businesses.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dreamnova-voice.vercel.app">
-  <meta name="description" content="Intelligent phone reception 24/7 for clinics & businesses.">
+  <meta property="og:locale" id="og-locale" content="he_IL">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://dreamnova-voice.vercel.app/og-image.png">
+  <meta property="og:site_name" content="Kol Nova">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="tw-title" content="Kol Nova — Smart Phone Reception 24/7">
+  <meta name="twitter:description" id="tw-desc" content="Never miss a patient call again.">
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📞</text></svg>">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Kol Nova",
+    "alternateName": "קול נובה",
+    "description": "24/7 intelligent phone reception for dental clinics and medical practices. Automatic appointment booking, daily summaries, and no-show recovery.",
+    "provider": {
+      "@type": "Organization",
+      "name": "DreamNova Consult",
+      "founder": { "@type": "Person", "name": "David Amor" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Jerusalem", "addressCountry": "IL" },
+      "url": "https://dreamnova-consult.vercel.app"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Israel" },
+      { "@type": "Country", "name": "France" },
+      { "@type": "Country", "name": "United States" }
+    ],
+    "serviceType": "AI Phone Reception",
+    "offers": [
+      { "@type": "Offer", "name": "Pilot", "price": "99", "priceCurrency": "USD", "description": "7-day trial" },
+      { "@type": "Offer", "name": "Voice + Booking", "price": "199", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" } },
+      { "@type": "Offer", "name": "Full Reception", "price": "349", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" } },
+      { "@type": "Offer", "name": "Multi-Location", "price": "599", "priceCurrency": "USD", "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" } }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Does Kol Nova store medical data?", "acceptedAnswer": { "@type": "Answer", "text": "No. Kol Nova does not store any medical data. We only handle appointment scheduling and call summaries. Patient privacy is fully protected." } },
+      { "@type": "Question", "name": "Do I need to change my existing phone system?", "acceptedAnswer": { "@type": "Answer", "text": "No. Kol Nova works on top of your existing system. No hardware changes, no software installations." } },
+      { "@type": "Question", "name": "Does Kol Nova replace my receptionist?", "acceptedAnswer": { "@type": "Answer", "text": "No. Kol Nova complements your receptionist by answering calls when she is busy, during evenings, and on weekends." } }
+    ]
+  }
+  </script>
+  <!-- GA4 placeholder -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -35,13 +96,21 @@
     .float { animation: float 3s ease-in-out infinite; }
     .lang-btn { transition: all 0.2s; }
     .lang-btn.active { background: #D4AF37; color: #1A1A2E; }
+    .skip-link { position: absolute; top: -40px; left: 0; background: #D4AF37; color: #1A1A2E; padding: 8px 16px; z-index: 100; font-weight: bold; border-radius: 0 0 8px 0; }
+    .skip-link:focus { top: 0; }
   </style>
 </head>
 <body class="bg-dark text-white">
+<!-- Skip to content (a11y) -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
 <script>
 const T = {
   he: {
     dir:'rtl', lang:'he',
+    meta_title:'קול נובה — קבלה טלפונית חכמה 24/7',
+    meta_desc:'פסיקו להפסיד מטופלים. קול נובה עונה 24/7, קובעת תורים אוטומטית ושולחת סיכום יומי.',
+    og_locale:'he_IL',
     nav_cta:'התחילו עכשיו', badge:'קבלה טלפונית חכמה למרפאות ועסקים',
     hero1:'פסיקו להפסיד מטופלים.', hero2:'קול נובה', hero3:' — קבלה טלפונית חכמה 24/7.',
     sub:'לא מחליפים את המזכירה. קולטים את השיחות שהיא לא מספיקה לענות.',
@@ -68,11 +137,19 @@ const T = {
     t1:'בטוח ומאובטח',t1d:'אף מידע רפואי לא נשמר. הפרטיות של המטופלים מוגנת.',
     t2:'בלי לשנות כלום',t2d:'עובד מעל המערכת הקיימת. התורים מופיעים ביומן כרגיל.',
     t3:'לא מחליף את הצוות',t3d:'משלים את המזכירה — עונה כשהיא תפוסה, בלילה, ובסוף שבוע.',
+    faq_t:'שאלות נפוצות',
+    faq1q:'האם קול נובה שומרת מידע רפואי?', faq1a:'לא. קול נובה לא שומרת שום מידע רפואי. אנחנו מטפלים רק בקביעת תורים וסיכומי שיחות. הפרטיות של המטופלים מוגנת לחלוטין.',
+    faq2q:'האם צריך לשנות את מערכת הטלפון?', faq2a:'לא. קול נובה עובדת מעל המערכת הקיימת שלכם. בלי שינוי חומרה, בלי התקנות.',
+    faq3q:'האם קול נובה מחליפה את המזכירה?', faq3a:'לא. קול נובה משלימה את המזכירה — עונה כשהיא תפוסה, בשעות הערב ובסופי שבוע.',
     fin_t:'מוכנים להפסיק להפסיד מטופלים?',fin_s:'פיילוט 7 ימים ב-390₪ בלבד. נקזז מהסטאפ אם ממשיכים.',fin_c:'דברו איתנו עכשיו בווטסאפ',
-    ft1:'קול נובה — שירות של DreamNova Consult',ft2:'דוד אמור · ירושלים · 2026',ft3:'לא מחליפים את המזכירה. קולטים את השיחות שהיא לא מספיקה לענות.'
+    ft1:'קול נובה — שירות של DreamNova Consult',ft2:'דוד אמור · ירושלים · 2026',ft3:'לא מחליפים את המזכירה. קולטים את השיחות שהיא לא מספיקה לענות.',
+    ft_privacy:'מדיניות פרטיות',ft_terms:'תנאי שימוש',ft_contact:'צרו קשר'
   },
   fr: {
     dir:'ltr', lang:'fr',
+    meta_title:'Kol Nova — Réception téléphonique intelligente 24/7',
+    meta_desc:'Arrêtez de perdre des patients. Kol Nova répond 24/7, prend les RDV automatiquement et envoie un résumé quotidien.',
+    og_locale:'fr_FR',
     nav_cta:'Commencer', badge:'Réception téléphonique intelligente pour cabinets & PME',
     hero1:'Arrêtez de perdre des patients.', hero2:'Kol Nova', hero3:' — réception téléphonique intelligente 24/7.',
     sub:'On ne remplace pas votre secrétaire. On absorbe les appels perdus et hors horaires.',
@@ -99,11 +176,19 @@ const T = {
     t1:'Sécurisé',t1d:'Aucune donnée médicale stockée. La vie privée de vos patients est protégée.',
     t2:'Sans rien changer',t2d:"Fonctionne par-dessus votre système existant. Les RDV apparaissent dans votre agenda.",
     t3:"Ne remplace pas l'équipe",t3d:"Complète votre secrétaire — répond quand elle est occupée, le soir et le week-end.",
+    faq_t:'Questions fréquentes',
+    faq1q:'Kol Nova stocke-t-elle des données médicales ?', faq1a:'Non. Kol Nova ne stocke aucune donnée médicale. Nous gérons uniquement la prise de RDV et les résumés d\'appels. La vie privée de vos patients est entièrement protégée.',
+    faq2q:'Faut-il changer mon système téléphonique ?', faq2a:'Non. Kol Nova fonctionne par-dessus votre système existant. Aucun changement matériel, aucune installation.',
+    faq3q:'Kol Nova remplace-t-elle ma secrétaire ?', faq3a:'Non. Kol Nova complète votre secrétaire en répondant quand elle est occupée, le soir et le week-end.',
     fin_t:'Prêt à ne plus perdre de patients ?',fin_s:'Pilote 7 jours à 49€ seulement. Déductible du setup si vous continuez.',fin_c:'Contactez-nous sur WhatsApp',
-    ft1:'Kol Nova — un service DreamNova Consult',ft2:'David Amor · Jérusalem · 2026',ft3:'On ne remplace pas votre secrétaire. On absorbe les appels perdus.'
+    ft1:'Kol Nova — un service DreamNova Consult',ft2:'David Amor · Jérusalem · 2026',ft3:'On ne remplace pas votre secrétaire. On absorbe les appels perdus.',
+    ft_privacy:'Politique de confidentialité',ft_terms:'Conditions générales',ft_contact:'Contact'
   },
   en: {
     dir:'ltr', lang:'en',
+    meta_title:'Kol Nova — Smart Phone Reception 24/7',
+    meta_desc:'Stop losing patients. Kol Nova answers 24/7, books appointments automatically, and sends daily summaries.',
+    og_locale:'en_US',
     nav_cta:'Get Started', badge:'Smart phone reception for clinics & businesses',
     hero1:'Stop losing patients.', hero2:'Kol Nova', hero3:' — smart phone reception 24/7.',
     sub:"We don't replace your receptionist. We catch the calls she can't answer.",
@@ -130,33 +215,57 @@ const T = {
     t1:'Secure & Private',t1d:"No medical data stored. Your patients' privacy is protected.",
     t2:'No changes needed',t2d:'Works on top of your existing system. Appointments appear in your calendar as usual.',
     t3:"Doesn't replace staff",t3d:"Complements your receptionist — answers when she's busy, at night, and on weekends.",
+    faq_t:'Frequently Asked Questions',
+    faq1q:'Does Kol Nova store medical data?', faq1a:'No. Kol Nova does not store any medical data. We only handle appointment scheduling and call summaries. Patient privacy is fully protected.',
+    faq2q:'Do I need to change my phone system?', faq2a:'No. Kol Nova works on top of your existing system. No hardware changes, no software installations.',
+    faq3q:'Does Kol Nova replace my receptionist?', faq3a:'No. Kol Nova complements your receptionist by answering calls when she is busy, during evenings, and on weekends.',
     fin_t:'Ready to stop losing patients?',fin_s:'7-day pilot for just $99. Deductible from setup if you continue.',fin_c:'Talk to us on WhatsApp now',
-    ft1:'Kol Nova — a DreamNova Consult service',ft2:'David Amor · Jerusalem · 2026',ft3:"We don't replace your receptionist. We catch the calls she can't answer."
+    ft1:'Kol Nova — a DreamNova Consult service',ft2:'David Amor · Jerusalem · 2026',ft3:"We don't replace your receptionist. We catch the calls she can't answer.",
+    ft_privacy:'Privacy Policy',ft_terms:'Terms of Service',ft_contact:'Contact'
   }
 };
 function detectLang(){const p=new URLSearchParams(location.search);if(p.get('lang')&&T[p.get('lang')])return p.get('lang');const b=navigator.language||'en';if(b.startsWith('he'))return'he';if(b.startsWith('fr'))return'fr';return'en';}
 let curLang=detectLang();
-function setLang(l){curLang=l;const t=T[l];document.documentElement.lang=t.lang;document.documentElement.dir=t.dir;document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;if(t[k])e.textContent=t[k];});document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const u=new URL(location);u.searchParams.set('lang',l);history.replaceState({},'',u);}
+function setLang(l){
+  curLang=l;const t=T[l];
+  document.documentElement.lang=t.lang;document.documentElement.dir=t.dir;
+  document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;if(t[k])e.textContent=t[k];});
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  // Dynamic SEO tags
+  document.title=t.meta_title;
+  document.querySelector('meta[name="description"]').content=t.meta_desc;
+  document.getElementById('og-title').content=t.meta_title;
+  document.getElementById('og-desc').content=t.meta_desc;
+  document.getElementById('og-locale').content=t.og_locale;
+  document.getElementById('tw-title').content=t.meta_title;
+  document.getElementById('tw-desc').content=t.meta_desc;
+  document.getElementById('canonical').href='https://dreamnova-voice.vercel.app/?lang='+l;
+  const u=new URL(location);u.searchParams.set('lang',l);history.replaceState({},'',u);
+}
 document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
 </script>
 
-<!-- Navbar -->
-<nav class="fixed top-0 right-0 left-0 z-50 bg-dark/95 backdrop-blur-md border-b border-gold/20">
+<!-- Header + Navbar -->
+<header>
+<nav class="fixed top-0 right-0 left-0 z-50 bg-dark/95 backdrop-blur-md border-b border-gold/20" role="navigation" aria-label="Main navigation">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <span class="text-2xl">📞</span>
+      <span class="text-2xl" aria-hidden="true">📞</span>
       <span class="text-xl font-bold text-gradient">Kol Nova</span>
     </div>
     <div class="flex items-center gap-2">
-      <div class="flex gap-1 bg-dark-light rounded-full p-1 border border-gold/20">
-        <button onclick="setLang('he')" data-lang="he" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">עב</button>
-        <button onclick="setLang('fr')" data-lang="fr" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">FR</button>
-        <button onclick="setLang('en')" data-lang="en" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20">EN</button>
+      <div class="flex gap-1 bg-dark-light rounded-full p-1 border border-gold/20" role="group" aria-label="Language switcher">
+        <button onclick="setLang('he')" data-lang="he" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20" aria-label="עברית — Switch to Hebrew">עב</button>
+        <button onclick="setLang('fr')" data-lang="fr" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20" aria-label="Français — Switch to French">FR</button>
+        <button onclick="setLang('en')" data-lang="en" class="lang-btn px-2 py-1 rounded-full text-xs font-bold text-gold hover:bg-gold/20" aria-label="English — Switch to English">EN</button>
       </div>
       <a href="#pricing" class="bg-gold text-dark px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-dark transition-colors"><span data-t="nav_cta">Get Started</span></a>
     </div>
   </div>
 </nav>
+</header>
+
+<main id="main-content">
 
 <!-- Hero -->
 <section class="min-h-screen flex items-center justify-center px-4 pt-20 pb-16">
@@ -169,7 +278,7 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
     <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" data-t="sub"></p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="https://wa.me/972584921492" class="gradient-gold text-dark px-8 py-4 rounded-xl font-bold text-lg glow pulse-gold hover:scale-105 transition-transform inline-flex items-center justify-center gap-2">
-        <svg class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span data-t="cta_wa"></span>
       </a>
       <a href="#demo" class="border-2 border-gold/50 text-gold px-8 py-4 rounded-xl font-bold text-lg hover:bg-gold/10 transition-colors inline-flex items-center justify-center gap-2"><span data-t="cta_demo"></span></a>
@@ -178,16 +287,16 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
 </section>
 
 <!-- Pain Points -->
-<section class="py-16 px-4 bg-dark-light">
+<section class="py-16 px-4 bg-dark-light" aria-label="Pain points">
   <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
-    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">📵</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain1"></p></div>
-    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">🕐</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain2"></p></div>
-    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4">⚡</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain3"></p></div>
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4" aria-hidden="true">📵</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain1"></p></div>
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4" aria-hidden="true">🕐</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain2"></p></div>
+    <div class="bg-dark/50 border border-red-500/20 rounded-2xl p-6 text-center card-hover"><div class="text-4xl mb-4" aria-hidden="true">⚡</div><p class="text-gray-300 text-lg leading-relaxed" data-t="pain3"></p></div>
   </div>
 </section>
 
 <!-- Features -->
-<section class="py-20 px-4">
+<section class="py-20 px-4" aria-label="How it works">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-t="how"></h2>
     <p class="text-gray-400 text-center mb-12 text-lg" data-t="how_sub"></p>
@@ -209,12 +318,12 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
 </section>
 
 <!-- Demo -->
-<section id="demo" class="py-20 px-4 bg-dark-light">
+<section id="demo" class="py-20 px-4 bg-dark-light" aria-label="Demo">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-t="demo_t"></h2>
     <p class="text-gray-400 mb-8 text-lg" data-t="demo_s"></p>
     <div class="bg-dark border-2 border-gold/20 rounded-2xl p-12 glow">
-      <div class="float text-6xl mb-6">🎧</div>
+      <div class="float text-6xl mb-6" aria-hidden="true">🎧</div>
       <p class="text-xl text-gray-300 mb-6" data-t="demo_r"></p>
       <a href="https://wa.me/972584921492?text=I%20want%20to%20hear%20the%20demo" class="gradient-gold text-dark px-8 py-3 rounded-xl font-bold text-lg inline-block hover:scale-105 transition-transform"><span data-t="demo_b"></span></a>
       <p class="text-sm text-gray-500 mt-4" data-t="demo_n"></p>
@@ -223,7 +332,7 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
 </section>
 
 <!-- Pricing -->
-<section id="pricing" class="py-20 px-4">
+<section id="pricing" class="py-20 px-4" aria-label="Pricing">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-t="pr_t"></h2>
     <p class="text-gray-400 text-center mb-12 text-lg" data-t="pr_s"></p>
@@ -235,9 +344,9 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
         <div class="text-gray-500 text-sm mb-4" data-t="p1per"></div>
         <div class="text-xs text-gold/80 bg-gold/10 rounded-lg px-3 py-1 inline-block mb-4" data-t="p1note"></div>
         <ul class="space-y-2 text-sm text-gray-400 mb-6">
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f1"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f2"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p1f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p1f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p1f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p1f3"></span></li>
         </ul>
         <a href="https://wa.me/972584921492" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p1c"></span></a>
       </div>
@@ -248,10 +357,10 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
         <div class="text-3xl font-extrabold mb-1"><span data-t="p2p"></span><span class="text-lg text-gray-400" data-t="p2per"></span></div>
         <div class="text-gray-500 text-sm mb-4" data-t="p2s"></div>
         <ul class="space-y-2 text-sm text-gray-400 mb-6">
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f1"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f2"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f3"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p2f4"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p2f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p2f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p2f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p2f4"></span></li>
         </ul>
         <a href="https://wa.me/972584921492" class="block w-full text-center gradient-gold text-dark py-3 rounded-xl font-bold hover:scale-105 transition-transform"><span data-t="p2c"></span></a>
       </div>
@@ -261,10 +370,10 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
         <div class="text-3xl font-extrabold mb-1"><span data-t="p3p"></span><span class="text-lg text-gray-400" data-t="p3per"></span></div>
         <div class="text-gray-500 text-sm mb-4" data-t="p3s"></div>
         <ul class="space-y-2 text-sm text-gray-400 mb-6">
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f1"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f2"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f3"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p3f4"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p3f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p3f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p3f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p3f4"></span></li>
         </ul>
         <a href="https://wa.me/972584921492" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p3c"></span></a>
       </div>
@@ -274,10 +383,10 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
         <div class="text-3xl font-extrabold mb-1"><span data-t="p4p"></span><span class="text-lg text-gray-400" data-t="p4per"></span></div>
         <div class="text-gray-500 text-sm mb-4" data-t="p4s"></div>
         <ul class="space-y-2 text-sm text-gray-400 mb-6">
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f1"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f2"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f3"></span></li>
-          <li class="flex items-start gap-2"><span class="text-gold mt-0.5">✓</span><span data-t="p4f4"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p4f1"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p4f2"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p4f3"></span></li>
+          <li class="flex items-start gap-2"><span class="text-gold mt-0.5" aria-hidden="true">✓</span><span data-t="p4f4"></span></li>
         </ul>
         <a href="https://wa.me/972584921492" class="block w-full text-center border border-gold text-gold py-3 rounded-xl font-bold hover:bg-gold hover:text-dark transition-colors"><span data-t="p4c"></span></a>
       </div>
@@ -286,34 +395,62 @@ document.addEventListener('DOMContentLoaded',()=>setLang(curLang));
 </section>
 
 <!-- Trust -->
-<section class="py-16 px-4 bg-dark-light">
+<section class="py-16 px-4 bg-dark-light" aria-label="Trust signals">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-2xl font-bold mb-8" data-t="tr_t"></h2>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6"><div class="text-3xl mb-3">🔒</div><h3 class="font-bold text-gold mb-2" data-t="t1"></h3><p class="text-gray-400 text-sm" data-t="t1d"></p></div>
-      <div class="p-6"><div class="text-3xl mb-3">🔌</div><h3 class="font-bold text-gold mb-2" data-t="t2"></h3><p class="text-gray-400 text-sm" data-t="t2d"></p></div>
-      <div class="p-6"><div class="text-3xl mb-3">👩‍⚕️</div><h3 class="font-bold text-gold mb-2" data-t="t3"></h3><p class="text-gray-400 text-sm" data-t="t3d"></p></div>
+      <div class="p-6"><div class="text-3xl mb-3" aria-hidden="true">🔒</div><h3 class="font-bold text-gold mb-2" data-t="t1"></h3><p class="text-gray-400 text-sm" data-t="t1d"></p></div>
+      <div class="p-6"><div class="text-3xl mb-3" aria-hidden="true">🔌</div><h3 class="font-bold text-gold mb-2" data-t="t2"></h3><p class="text-gray-400 text-sm" data-t="t2d"></p></div>
+      <div class="p-6"><div class="text-3xl mb-3" aria-hidden="true">👩‍⚕️</div><h3 class="font-bold text-gold mb-2" data-t="t3"></h3><p class="text-gray-400 text-sm" data-t="t3d"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-20 px-4" aria-label="FAQ">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12" data-t="faq_t"></h2>
+    <div class="space-y-4">
+      <details class="bg-dark-light border border-gold/20 rounded-2xl p-6 group">
+        <summary class="font-bold text-gold cursor-pointer list-none flex items-center justify-between"><span data-t="faq1q"></span><span class="text-gold/50 group-open:rotate-45 transition-transform text-2xl">+</span></summary>
+        <p class="text-gray-400 mt-4 leading-relaxed" data-t="faq1a"></p>
+      </details>
+      <details class="bg-dark-light border border-gold/20 rounded-2xl p-6 group">
+        <summary class="font-bold text-gold cursor-pointer list-none flex items-center justify-between"><span data-t="faq2q"></span><span class="text-gold/50 group-open:rotate-45 transition-transform text-2xl">+</span></summary>
+        <p class="text-gray-400 mt-4 leading-relaxed" data-t="faq2a"></p>
+      </details>
+      <details class="bg-dark-light border border-gold/20 rounded-2xl p-6 group">
+        <summary class="font-bold text-gold cursor-pointer list-none flex items-center justify-between"><span data-t="faq3q"></span><span class="text-gold/50 group-open:rotate-45 transition-transform text-2xl">+</span></summary>
+        <p class="text-gray-400 mt-4 leading-relaxed" data-t="faq3a"></p>
+      </details>
     </div>
   </div>
 </section>
 
 <!-- Final CTA -->
-<section class="py-20 px-4">
+<section class="py-20 px-4" aria-label="Call to action">
   <div class="max-w-3xl mx-auto text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-t="fin_t"></h2>
     <p class="text-gray-400 text-lg mb-8" data-t="fin_s"></p>
     <a href="https://wa.me/972584921492" class="gradient-gold text-dark px-10 py-5 rounded-2xl font-bold text-xl glow pulse-gold hover:scale-105 transition-transform inline-flex items-center gap-3">
-      <svg class="w-7 h-7 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <svg class="w-7 h-7 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       <span data-t="fin_c"></span>
     </a>
   </div>
 </section>
+
+</main>
 
 <!-- Footer -->
 <footer class="py-8 px-4 border-t border-gold/10">
   <div class="max-w-4xl mx-auto text-center text-gray-500 text-sm">
     <p class="mb-2" data-t="ft1"></p>
     <p data-t="ft2"></p>
+    <div class="mt-4 flex justify-center gap-6 text-xs">
+      <a href="#privacy" class="text-gray-600 hover:text-gold transition-colors" data-t="ft_privacy"></a>
+      <a href="#terms" class="text-gray-600 hover:text-gold transition-colors" data-t="ft_terms"></a>
+      <a href="https://wa.me/972584921492" class="text-gray-600 hover:text-gold transition-colors" data-t="ft_contact"></a>
+    </div>
     <p class="mt-4 text-xs text-gray-600" data-t="ft3"></p>
   </div>
 </footer>

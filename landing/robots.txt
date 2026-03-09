@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dreamnova-voice.vercel.app/sitemap.xml
